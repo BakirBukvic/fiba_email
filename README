@@ -1,11 +1,52 @@
-1. Go to folder db
-2. Run the file make_db.py, this will make a file SQL:
-        registrationIsOpen | boolean, small case
-        id | string
-        name | string
-        startDate |2025-09-06T00:00:00
-        endDate |2025-09-06T00:00:00
-        city | string
 
-3. 
+# FIBA 3x3 Bosnia Event Scraper
 
+A Python script to scrape FIBA 3x3 basketball events for Bosnia and Herzegovina, store them in a database, and send email notifications when events change.
+
+## Setup
+
+1. Create a virtual environment:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+2. Install dependencies:
+```bash
+pip install requests python-dotenv
+```
+
+3. Create a `.env` file with your email credentials:
+```
+EMAIL_USER=your.email@gmail.com
+EMAIL_PASSWORD=your_app_password
+TO_EMAIL=recipient@gmail.com
+```
+
+## Usage
+
+Run the scraper manually:
+```bash
+python get_events/store_db.py
+```
+
+The script will:
+- Fetch current events from FIBA 3x3 API
+- Store them in SQLite database (db/events.db)
+- Compare with previous events
+- Send email notifications if events are added or removed
+
+## Files
+
+- `get_events/get_events.py` - API scraping
+- `get_events/store_db.py` - Main orchestration script  
+- `db/make_db.py` - Database operations
+- `notify.py` - Email notifications
+- `.env` - Email configuration (create this file)
+
+## Email Setup
+
+For Gmail, use an App Password instead of your regular password:
+1. Enable 2-factor authentication
+2. Generate an App Password in Google Account settings
+3. Use the App Password in your `.env` file

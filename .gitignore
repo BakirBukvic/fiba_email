@@ -9,3 +9,8 @@ venv
 venv/
 __pycache__/
 *.pyc
+
+# Database files (but not Python scripts)
+*.db
+*.sqlite
+*.sqlite3
