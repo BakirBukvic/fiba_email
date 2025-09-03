@@ -1,7 +1,7 @@
 @hourly dpkg -l | grep -i steam && sudo apt purge -y steam steam-launcher steam:i386
 
-# FIBA 3x3 Events Scraper - runs daily at 11:00 AM
-0 11 * * * /home/bakir/Desktop/fiba3x3BiH/run_daily.sh
+# FIBA 3x3 Events Scraper - runs daily at 12:37 PM
+37 12 * * * /home/bakir/Desktop/fiba3x3BiH/run_daily.sh
 
 # Check for missed anacron jobs every hour
 0 * * * * /usr/sbin/anacron -t ~/.anacrontab -S ~/.anacron

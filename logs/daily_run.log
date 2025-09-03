@@ -35,3 +35,89 @@ Upcoming events with open registration:
 ✅ All done! Events have been scraped and stored in the database.
 2025-09-03 12:24:39 - Script completed successfully
 2025-09-03 12:24:39 - Daily run completed
+2025-09-03 12:34:16 - Starting daily FIBA 3x3 events scraper
+2025-09-03 12:34:16 - Virtual environment activated
+==================================================
+FIBA 3x3 Events Scraper Starting...
+==================================================
+Database created successfully at: /home/bakir/Desktop/fiba3x3BiH/db/events.db
+Found 0 existing events in database
+Retrieved 4 events from API
+Stored event: 3X3 SC BORIK 2025 in Banja Luka
+Stored event: Winter Tour 3x3 Banja Luka in Banja Luka
+Stored event: VIVIA 3X3 PRNJAVOR 2026 - OMLADINSKI TURNIR in Prnjavor
+Stored event: VIVIA 3X3 PRNJAVOR 2026 in Prnjavor
+NEW EVENTS:
+3X3 SC BORIK 2025 - Banja Luka - OPEN
+Winter Tour 3x3 Banja Luka - Banja Luka - OPEN
+VIVIA 3X3 PRNJAVOR 2026 - OMLADINSKI TURNIR - Prnjavor - OPEN
+VIVIA 3X3 PRNJAVOR 2026 - Prnjavor - OPEN
+Email sent successfully to: bakibakirbax@gmail.com, agicmirza04@hotmail.com
+
+📊 Summary:
+   • Total events from API: 4
+   • Events stored to database: 4
+   • New events detected: 4
+   • Missing events detected: 0
+   • Scrape date: 2025-09-03
+
+==================================================
+Process completed successfully!
+==================================================
+
+Database Summary:
+- Total events in database: 4
+- Events with open registration: 4
+
+Upcoming events with open registration:
+  • 3X3 SC BORIK 2025 in Banja Luka - 2025-09-06
+  • Winter Tour 3x3 Banja Luka in Banja Luka - 2026-01-10
+  • VIVIA 3X3 PRNJAVOR 2026 - OMLADINSKI TURNIR in Prnjavor - 2026-07-13
+  • VIVIA 3X3 PRNJAVOR 2026 in Prnjavor - 2026-07-18
+
+✅ All done! Events have been scraped and stored in the database.
+2025-09-03 12:34:17 - Script completed successfully
+2025-09-03 12:34:17 - Daily run completed
+2025-09-03 12:37:01 - Starting daily FIBA 3x3 events scraper
+2025-09-03 12:37:01 - Virtual environment activated
+==================================================
+FIBA 3x3 Events Scraper Starting...
+==================================================
+Database created successfully at: /home/bakir/Desktop/fiba3x3BiH/db/events.db
+Found 0 existing events in database
+Retrieved 4 events from API
+Stored event: 3X3 SC BORIK 2025 in Banja Luka
+Stored event: Winter Tour 3x3 Banja Luka in Banja Luka
+Stored event: VIVIA 3X3 PRNJAVOR 2026 - OMLADINSKI TURNIR in Prnjavor
+Stored event: VIVIA 3X3 PRNJAVOR 2026 in Prnjavor
+NEW EVENTS:
+3X3 SC BORIK 2025 - Banja Luka - OPEN
+Winter Tour 3x3 Banja Luka - Banja Luka - OPEN
+VIVIA 3X3 PRNJAVOR 2026 - OMLADINSKI TURNIR - Prnjavor - OPEN
+VIVIA 3X3 PRNJAVOR 2026 - Prnjavor - OPEN
+Email sent successfully to: bakibakirbax@gmail.com, agicmirza04@hotmail.com
+
+📊 Summary:
+   • Total events from API: 4
+   • Events stored to database: 4
+   • New events detected: 4
+   • Missing events detected: 0
+   • Scrape date: 2025-09-03
+
+==================================================
+Process completed successfully!
+==================================================
+
+Database Summary:
+- Total events in database: 4
+- Events with open registration: 4
+
+Upcoming events with open registration:
+  • 3X3 SC BORIK 2025 in Banja Luka - 2025-09-06
+  • Winter Tour 3x3 Banja Luka in Banja Luka - 2026-01-10
+  • VIVIA 3X3 PRNJAVOR 2026 - OMLADINSKI TURNIR in Prnjavor - 2026-07-13
+  • VIVIA 3X3 PRNJAVOR 2026 in Prnjavor - 2026-07-18
+
+✅ All done! Events have been scraped and stored in the database.
+2025-09-03 12:37:03 - Script completed successfully
+2025-09-03 12:37:03 - Daily run completed
