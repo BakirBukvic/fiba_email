@@ -8,6 +8,7 @@ sys.path.insert(0, parent_dir)
 
 from get_events.get_events import get_events
 from db.make_db import insert_event, create_database, get_existing_event_ids
+from notify_events.notify import send_notifications
 
 def store_events_to_db():
     """
@@ -94,29 +95,9 @@ def store_events_to_db():
         
         conn.close()
     
-    # Report on new events found
-    if new_events:
-        print(f"\n🎉 NEW EVENTS DETECTED ({len(new_events)}):")
-        for event in new_events:
-            reg_status = "🟢 OPEN" if event['registrationIsOpen'] else "🔴 CLOSED"
-            print(f"   • {event['name']} in {event['city']} - {reg_status}")
-            print(f"     📅 {event['startDate'][:10]} to {event['endDate'][:10]}")
-        print("\n📧 [NOTIFICATION NEEDED] - Send notification about new events")
-    
-    # Report on missing events
-    if missing_events:
-        print(f"\n⚠️  MISSING EVENTS DETECTED ({len(missing_events)}):")
-        print("   Events that were in database but not found in current API response:")
-        for event in missing_events:
-            reg_status = "🟢 OPEN" if event['registrationIsOpen'] else "🔴 CLOSED"
-            print(f"   • {event['name']} in {event['city']} - {reg_status}")
-            print(f"     📅 {event['startDate'][:10]} to {event['endDate'][:10]}")
-            print(f"     🕒 Last scraped: {event['date_scraped']}")
-        print("\n📧 [NOTIFICATION NEEDED] - Send notification about missing events")
-    
-    # Summary message
-    if not new_events and not missing_events:
-        print(f"\n✅ No new or missing events found since last scrape")
+    # Send notifications if there are changes
+    if new_events or missing_events:
+        send_notifications(new_events, missing_events)
     
     print(f"\n📊 Summary:")
     print(f"   • Total events from API: {len(events)}")
