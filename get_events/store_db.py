@@ -31,8 +31,9 @@ def store_events_to_db():
     # Current scraping date
     scrape_date = datetime.now().strftime("%Y-%m-%d")
     
-    # Track new events
+    # Track new events and missing events
     new_events = []
+    missing_events = []
     current_event_ids = set()
     
     # Store each event in the database
@@ -66,6 +67,33 @@ def store_events_to_db():
         except Exception as e:
             print(f"Error storing event {event.get('id', 'unknown')}: {e}")
     
+    # Check for missing events (events in database but not in current API response)
+    missing_event_ids = existing_event_ids - current_event_ids
+    if missing_event_ids:
+        # Get details of missing events from database
+        from db.make_db import get_db_connection
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        for missing_id in missing_event_ids:
+            cursor.execute('''
+                SELECT id, name, registrationIsOpen, startDate, endDate, city, date_scraped
+                FROM events WHERE id = ?
+            ''', (missing_id,))
+            event_data = cursor.fetchone()
+            if event_data:
+                missing_events.append({
+                    'id': event_data[0],
+                    'name': event_data[1],
+                    'registrationIsOpen': event_data[2],
+                    'startDate': event_data[3],
+                    'endDate': event_data[4],
+                    'city': event_data[5],
+                    'date_scraped': event_data[6]
+                })
+        
+        conn.close()
+    
     # Report on new events found
     if new_events:
         print(f"\n🎉 NEW EVENTS DETECTED ({len(new_events)}):")
@@ -74,16 +102,41 @@ def store_events_to_db():
             print(f"   • {event['name']} in {event['city']} - {reg_status}")
             print(f"     📅 {event['startDate'][:10]} to {event['endDate'][:10]}")
         print("\n📧 [NOTIFICATION NEEDED] - Send notification about new events")
-    else:
-        print(f"\n✅ No new events found since last scrape")
+    
+    # Report on missing events
+    if missing_events:
+        print(f"\n⚠️  MISSING EVENTS DETECTED ({len(missing_events)}):")
+        print("   Events that were in database but not found in current API response:")
+        for event in missing_events:
+            reg_status = "🟢 OPEN" if event['registrationIsOpen'] else "🔴 CLOSED"
+            print(f"   • {event['name']} in {event['city']} - {reg_status}")
+            print(f"     📅 {event['startDate'][:10]} to {event['endDate'][:10]}")
+            print(f"     🕒 Last scraped: {event['date_scraped']}")
+        print("\n📧 [NOTIFICATION NEEDED] - Send notification about missing events")
+    
+    # Summary message
+    if not new_events and not missing_events:
+        print(f"\n✅ No new or missing events found since last scrape")
     
     print(f"\n📊 Summary:")
     print(f"   • Total events from API: {len(events)}")
     print(f"   • Events stored to database: {stored_count}")
     print(f"   • New events detected: {len(new_events)}")
+    print(f"   • Missing events detected: {len(missing_events)}")
     print(f"   • Scrape date: {scrape_date}")
     
-    return events_data
+    return {
+        'events_data': events_data,
+        'new_events': new_events,
+        'missing_events': missing_events,
+        'summary': {
+            'total_api_events': len(events),
+            'stored_count': stored_count,
+            'new_count': len(new_events),
+            'missing_count': len(missing_events),
+            'scrape_date': scrape_date
+        }
+    }
 
 if __name__ == "__main__":
     store_events_to_db()

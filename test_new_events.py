@@ -151,7 +151,10 @@ def test_with_simulated_data():
     existing_ids = get_existing_event_ids()
     print(f"Events in database before test: {len(existing_ids)}")
     
-    # Create a mock get_events function
+    # Create a mock get_events function that simulates:
+    # - Some existing events (should not be flagged as new)
+    # - Some new events (should be flagged as new) 
+    # - Some missing events (events in DB but not in API response)
     def mock_get_events():
         return {
             "results": [
@@ -181,6 +184,8 @@ def test_with_simulated_data():
                     "endDate": "2026-04-11T23:59:59",
                     "city": "Doboj"
                 }
+                # Note: Not including some events that are in the database
+                # This will simulate missing events
             ]
         }
     
@@ -191,12 +196,71 @@ def test_with_simulated_data():
     
     try:
         print("🔄 Running store_events_to_db with mocked data...")
-        store_events_to_db()
+        result = store_events_to_db()
+        
+        print("\n📋 Test Results:")
+        if 'summary' in result:
+            summary = result['summary']
+            print(f"   • New events detected: {summary['new_count']}")
+            print(f"   • Missing events detected: {summary['missing_count']}")
+            print(f"   • Total API events: {summary['total_api_events']}")
+        
     finally:
         # Restore original function
         store_module.get_events = original_get_events
     
     print("\n✅ Test completed!")
+
+def test_missing_events_only():
+    """Test specifically for missing event detection"""
+    print("\n🔍 TESTING MISSING EVENTS DETECTION")
+    print("=" * 50)
+    
+    from get_events.store_db import store_events_to_db
+    from db.make_db import get_existing_event_ids
+    
+    existing_ids = get_existing_event_ids()
+    print(f"Current database has {len(existing_ids)} events")
+    
+    # Create a mock that returns FEWER events than what's in the database
+    # This will simulate events disappearing from the API
+    def mock_get_events_missing():
+        return {
+            "results": [
+                # Only return ONE event, leaving the rest "missing"
+                {
+                    "id": "2ee22e60-c68b-459a-98f3-8c00cb11472d",
+                    "name": "3X3 SC BORIK 2025",
+                    "registrationIsOpen": True,
+                    "startDate": "2025-09-06T00:00:00", 
+                    "endDate": "2025-09-07T23:59:59",
+                    "city": "Banja Luka"
+                }
+                # All other events in the database will be flagged as "missing"
+            ]
+        }
+    
+    # Temporarily replace the get_events function
+    import get_events.store_db as store_module
+    original_get_events = store_module.get_events
+    store_module.get_events = mock_get_events_missing
+    
+    try:
+        print("🔄 Running with API that returns fewer events...")
+        result = store_events_to_db()
+        
+        if 'summary' in result:
+            summary = result['summary']
+            print(f"\n📊 Missing Events Test Results:")
+            print(f"   • API returned: {summary['total_api_events']} events")
+            print(f"   • Missing events: {summary['missing_count']}")
+            if summary['missing_count'] > 0:
+                print("   ✅ Missing event detection is working!")
+            else:
+                print("   ⚠️  No missing events detected")
+    finally:
+        # Restore original function
+        store_module.get_events = original_get_events
 
 def cleanup_test_data():
     """Remove test events from database"""
@@ -234,12 +298,13 @@ def main():
     print("=" * 40)
     print("1. Add test events to database")
     print("2. Create simulated API response")  
-    print("3. Test with simulated data (RECOMMENDED)")
-    print("4. Cleanup test data")
-    print("5. Show current database state")
+    print("3. Test with simulated data (new + missing events)")
+    print("4. Test missing events detection only")
+    print("5. Cleanup test data")
+    print("6. Show current database state")
     print()
     
-    choice = input("Choose option (1-5): ").strip()
+    choice = input("Choose option (1-6): ").strip()
     
     if choice == "1":
         add_test_events()
@@ -248,8 +313,10 @@ def main():
     elif choice == "3":
         test_with_simulated_data()
     elif choice == "4":
-        cleanup_test_data()
+        test_missing_events_only()
     elif choice == "5":
+        cleanup_test_data()
+    elif choice == "6":
         all_events = get_all_events()
         print(f"\n📊 Current database state ({len(all_events)} events):")
         for event in all_events:
