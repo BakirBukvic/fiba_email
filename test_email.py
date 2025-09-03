@@ -16,7 +16,7 @@ def test_email_setup():
     print("=" * 40)
     
     try:
-        from notify_events.notify import GMAIL_USER, GMAIL_APP_PASSWORD, RECIPIENTS
+        from notify import GMAIL_USER, GMAIL_APP_PASSWORD, RECIPIENTS
         
         print(f"Gmail User: {GMAIL_USER}")
         print(f"App Password: {'*' * len(GMAIL_APP_PASSWORD) if GMAIL_APP_PASSWORD and GMAIL_APP_PASSWORD != 'your-app-password' else 'NOT SET'}")
@@ -46,7 +46,7 @@ def send_test_email():
     print("\n📧 SENDING TEST EMAIL")
     print("=" * 30)
     
-    from notify_events.notify import send_email
+    from notify import send_email
     
     subject = "FIBA 3x3 Test Email"
     body = """This is a test email from your FIBA 3x3 event monitoring system.
@@ -73,7 +73,7 @@ def test_notification_system():
     print("\n🔔 TESTING NOTIFICATION SYSTEM")
     print("=" * 35)
     
-    from notify_events.notify import send_notifications
+    from notify import send_notifications
     
     # Create fake test data
     fake_new_events = [

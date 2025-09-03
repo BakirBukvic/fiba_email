@@ -8,7 +8,7 @@ sys.path.insert(0, parent_dir)
 
 from get_events.get_events import get_events
 from db.make_db import insert_event, create_database, get_existing_event_ids
-from notify_events.notify import send_notifications
+from notify import send_notifications
 
 def store_events_to_db():
     """
