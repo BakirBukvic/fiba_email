@@ -1,0 +1,51 @@
+{
+  "results": [
+    {
+      "registrationIsOpen": true,
+      "id": "2ee22e60-c68b-459a-98f3-8c00cb11472d",
+      "name": "3X3 SC BORIK 2025",
+      "startDate": "2025-09-06T00:00:00",
+      "endDate": "2025-09-07T23:59:59",
+      "city": "Banja Luka",
+      "cityCountryIso2": "BA",
+      "imageTinyUrl": "https://assets.fiba3x3.com/images/Tournament/2/e/e/2/2ee22e60-c68b-459a-98f3-8c00cb11472d/tournament.80.png?ck=638906149040000000",
+      "imageSmallUrl": "https://assets.fiba3x3.com/images/Tournament/2/e/e/2/2ee22e60-c68b-459a-98f3-8c00cb11472d/tournament.160.png?ck=638906149040000000",
+      "imageMediumUrl": "https://assets.fiba3x3.com/images/Tournament/2/e/e/2/2ee22e60-c68b-459a-98f3-8c00cb11472d/tournament.400.png?ck=638906149040000000"
+    },
+    {
+      "registrationIsOpen": true,
+      "id": "2f1dd447-d0fd-4516-a799-d4fdf5cfd373",
+      "name": "Winter Tour 3x3 Banja Luka",
+      "startDate": "2026-01-10T00:00:00",
+      "endDate": "2026-01-11T23:59:59",
+      "city": "Banja Luka",
+      "cityCountryIso2": "BA"
+    },
+    {
+      "registrationIsOpen": true,
+      "id": "a90f53ba-fb3f-4558-bac1-ac27f657a42e",
+      "name": "VIVIA 3X3 PRNJAVOR 2026 - OMLADINSKI TURNIR",
+      "startDate": "2026-07-13T00:00:00",
+      "endDate": "2026-07-16T23:59:59",
+      "city": "Prnjavor",
+      "cityCountryIso2": "BA",
+      "imageTinyUrl": "https://assets.fiba3x3.com/images/Tournament/a/9/0/f/a90f53ba-fb3f-4558-bac1-ac27f657a42e/tournament.80.png?ck=638916397020000000",
+      "imageSmallUrl": "https://assets.fiba3x3.com/images/Tournament/a/9/0/f/a90f53ba-fb3f-4558-bac1-ac27f657a42e/tournament.160.png?ck=638916397020000000",
+      "imageMediumUrl": "https://assets.fiba3x3.com/images/Tournament/a/9/0/f/a90f53ba-fb3f-4558-bac1-ac27f657a42e/tournament.400.png?ck=638916397020000000"
+    },
+    {
+      "registrationIsOpen": true,
+      "id": "a4f46fa2-2651-41de-a868-5cc732ab749c",
+      "name": "VIVIA 3X3 PRNJAVOR 2026",
+      "startDate": "2026-07-18T00:00:00",
+      "endDate": "2026-07-19T23:59:59",
+      "city": "Prnjavor",
+      "cityCountryIso2": "BA",
+      "imageTinyUrl": "https://assets.fiba3x3.com/images/Tournament/a/4/f/4/a4f46fa2-2651-41de-a868-5cc732ab749c/tournament.80.png?ck=638916394500000000",
+      "imageSmallUrl": "https://assets.fiba3x3.com/images/Tournament/a/4/f/4/a4f46fa2-2651-41de-a868-5cc732ab749c/tournament.160.png?ck=638916394500000000",
+      "imageMediumUrl": "https://assets.fiba3x3.com/images/Tournament/a/4/f/4/a4f46fa2-2651-41de-a868-5cc732ab749c/tournament.400.png?ck=638916394500000000"
+    }
+  ],
+  "totalCount": 4,
+  "currentPageNum": 1
+}

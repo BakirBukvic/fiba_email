@@ -1,0 +1,11 @@
+1. Go to folder db
+2. Run the file make_db.py, this will make a file SQL:
+        registrationIsOpen | boolean, small case
+        id | string
+        name | string
+        startDate |2025-09-06T00:00:00
+        endDate |2025-09-06T00:00:00
+        city | string
+
+3. 
+
