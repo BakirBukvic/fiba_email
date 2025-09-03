@@ -1,0 +1,9 @@
+# User anacrontab file
+# Format: period delay job-identifier command
+# period: number of days between runs
+# delay: minutes to wait before running after system startup
+# job-identifier: unique name for the job
+# command: command to execute
+
+# Run FIBA 3x3 scraper daily (if missed by cron)
+1 5 fiba3x3_daily /home/bakir/Desktop/fiba3x3BiH/run_anacron.sh
