@@ -24,6 +24,7 @@ def create_database():
             startDate TEXT NOT NULL,
             endDate TEXT NOT NULL,
             city TEXT NOT NULL,
+            date_scraped TEXT NOT NULL,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP,
             updated_at TEXT DEFAULT CURRENT_TIMESTAMP
         )
@@ -69,8 +70,8 @@ def insert_event(event_data):
     
     cursor.execute('''
         INSERT OR REPLACE INTO events 
-        (id, name, registrationIsOpen, startDate, endDate, city, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        (id, name, registrationIsOpen, startDate, endDate, city, date_scraped, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     ''', (
         event_data['id'],
         event_data['name'],
@@ -78,6 +79,7 @@ def insert_event(event_data):
         event_data['startDate'],
         event_data['endDate'],
         event_data['city'],
+        event_data['date_scraped'],
         datetime.now().isoformat()
     ))
     
@@ -93,7 +95,7 @@ def get_all_events():
     
     cursor.execute('''
         SELECT id, name, registrationIsOpen, startDate, endDate, city, 
-               created_at, updated_at 
+               date_scraped, created_at, updated_at 
         FROM events 
         ORDER BY startDate
     ''')
@@ -112,7 +114,7 @@ def get_open_registrations():
     
     cursor.execute('''
         SELECT id, name, registrationIsOpen, startDate, endDate, city, 
-               created_at, updated_at 
+               date_scraped, created_at, updated_at 
         FROM events 
         WHERE registrationIsOpen = 1
         ORDER BY startDate
@@ -122,6 +124,19 @@ def get_open_registrations():
     conn.close()
     
     return events
+
+def get_existing_event_ids():
+    """
+    Get all existing event IDs from the database.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute('SELECT id FROM events')
+    result = cursor.fetchall()
+    conn.close()
+    
+    return {row[0] for row in result}  # Return as a set for fast lookup
 
 if __name__ == "__main__":
     # Create the database and table
